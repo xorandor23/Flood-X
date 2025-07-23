@@ -118,6 +118,10 @@ def check_ssh():
     except Exception as e:
         return jsonify({'success': False, 'message': f'Command execution failed: {str(e)}', 'status': status})
 
+@app.route('/test')
+def testing():
+    return jsonify({'success': True, 'message': 'Success', 'status': 0});
+
 active_sessions = {}
 
 @sock.route('/ws')
@@ -186,5 +190,6 @@ def ws_terminal(ws):
             del active_sessions[ip]
         print("Koneksi SSH ditutup")
 
+
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run(debug=True, port=9129)
